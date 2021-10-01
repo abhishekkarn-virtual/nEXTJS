@@ -1,9 +1,9 @@
-import { MongoClient, ObjectId } from "mongodb";
-import { useRouter } from "next/router";
+import { ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { connectToDatabase } from "../../lib/mongodb";
 
 function MeetupDetails(props) {
+  // console.log("MeetupDetails",props);
   return (
     <MeetupDetail
       image={props.meetupData.image}
@@ -23,19 +23,6 @@ export async function getStaticPaths() {
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
-
-    // [
-    //   {
-    //     params: {
-    //       meetupId: "m1",
-    //     },
-    //   },
-    //   {
-    //     params: {
-    //       meetupId: "m2",
-    //     },
-    //   },
-    // ],
   };
 }
 
@@ -44,10 +31,11 @@ export async function getStaticProps(context) {
 
   const meetupId = context.params.meetupId;
   const { db } = await connectToDatabase();
-  console.log(ObjectId(meetupId));
+  // console.log(ObjectId(meetupId));
   const selectedMeetup = await db
     .collection("meetups")
     .findOne({ _id: ObjectId(meetupId) });
+    // console.log(selectedMeetup);
 
   return {
     props: {

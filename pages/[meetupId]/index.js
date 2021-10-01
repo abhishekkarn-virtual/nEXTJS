@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { connectToDatabase } from "../../lib/mongodb";
 

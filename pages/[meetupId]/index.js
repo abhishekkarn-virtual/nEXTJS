@@ -4,8 +4,6 @@ import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { connectToDatabase } from "../../lib/mongodb";
 
 function MeetupDetails(props) {
-  const router=useRouter();
-  console.log(router.params.meetupId);
   return (
     <MeetupDetail
       image={props.meetupData.image}
@@ -46,6 +44,7 @@ export async function getStaticProps(context) {
 
   const meetupId = context.params.meetupId;
   const { db } = await connectToDatabase();
+  console.log(ObjectId(meetupId));
   const selectedMeetup = await db
     .collection("meetups")
     .findOne({ _id: ObjectId(meetupId) });
